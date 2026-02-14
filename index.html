@@ -2,113 +2,100 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>¿Quieres ser mi San Valentín?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín</title>
 
 <style>
 body{
     margin:0;
-    height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background: linear-gradient(-45deg,#ff8fab,#ff758c,#ff9fb2,#ff8fab);
+    background-size:400% 400%;
+    animation:fondo 12s ease infinite;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:'Segoe UI',sans-serif;
-    background: linear-gradient(-45deg,#ff758c,#ff7eb3,#ffb199,#ff758c);
-    background-size:400% 400%;
-    animation: fondo 12s ease infinite;
+    min-height:100vh;
     overflow:hidden;
 }
 
-/* Fondo animado */
 @keyframes fondo{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
 
-/* Tarjeta */
 .card{
-    background:rgba(255,255,255,0.2);
+    width:90%;
+    max-width:700px;
+    background:rgba(255,255,255,0.25);
     backdrop-filter: blur(15px);
-    padding:45px;
+    padding:40px 25px;
     border-radius:30px;
     text-align:center;
     color:white;
     box-shadow:0 0 40px rgba(0,0,0,0.25);
-    animation: entrada 1.5s ease;
+    animation:entrada 1.2s ease;
 }
 
-/* Animación entrada */
 @keyframes entrada{
-    from{opacity:0; transform:scale(0.7)}
+    from{opacity:0; transform:scale(.8)}
     to{opacity:1; transform:scale(1)}
 }
 
 h1{
-    font-size:2.7em;
-    margin-bottom:10px;
-    text-shadow:0 0 15px rgba(255,255,255,0.8);
+    font-size:2em;
+    margin-bottom:15px;
 }
 
 p{
-    font-size:1.8em;
+    font-size:1.2em;
     margin-bottom:25px;
 }
 
-/* Botones */
+.botones{
+    margin-top:20px;
+}
+
 button{
     border:none;
     padding:15px 35px;
-    margin:12px;
+    margin:10px;
     font-size:1.2em;
     border-radius:50px;
     cursor:pointer;
     transition:.3s;
-    position:relative;
 }
 
-/* Sí */
 .si{
     background:#ff4d6d;
     color:white;
-    box-shadow:0 0 50px #ff4d6d;
 }
-.si:hover{
-    transform:scale(1.15);
-    box-shadow:0 0 30px #ff4d6d;
-}
+.si:hover{transform:scale(1.1);}
 
-/* No */
 .no{
-    background:white;
+    background:#eee;
     color:#ff4d6d;
     font-weight:bold;
 }
-.no:hover{
-    transform:translateX(10px);
+.no:hover{transform:scale(1.1);}
+
+#mensaje{
+    margin-top:20px;
+    font-size:1.3em;
+    font-weight:bold;
 }
 
-/* Corazones flotando */
 .corazon{
     position:absolute;
     color:white;
-    font-size:20px;
-    animation: flotar linear infinite;
-}
-@keyframes flotar{
-    from{transform:translateY(100vh); opacity:1}
-    to{transform:translateY(-10vh); opacity:0}
+    font-size:18px;
+    animation:flotar linear infinite;
 }
 
-/* Mensaje */
-#mensaje{
-    margin-top:20px;
-    font-size:1.4em;
-    font-weight:bold;
-    animation: latido 1s infinite;
-}
-@keyframes latido{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.1)}
+@keyframes flotar{
+    from{transform:translateY(100vh);opacity:1}
+    to{transform:translateY(-10vh);opacity:0}
 }
 </style>
 </head>
@@ -116,44 +103,41 @@ button{
 <body>
 
 <div class="card">
-    <h1>💖 Dulcesito de mi corazón ¿Te gustaria ser mi San Valentín? 💖</h1>
-    <p>¡Me encanatria que aceptaras! Prometo abrazos y muchos momentos bonitos 🌹 <br>
-        Pdt: la pagina que hice esta diseñada para que el boton que elijas sea el que tu quieres.
-    </p>
+<h1>💖 Dulcesito de mi corazón ¿Te gustaría ser mi San Valentín? 💖</h1>
 
-    <button class="si" onclick="si()">Sí 💘</button>
-    <button class="no" onmouseover="mover(this)">No 😳</button>
+<p>
+¡Me encantaría que aceptaras! Prometo abrazos y muchos momentos bonitos 🌹
+</p>
 
-    <div id="mensaje"></div>
+<div class="botones">
+<button class="si" onclick="si()">Sí 💘</button>
+<button class="no" onclick="no()">No 😳</button>
+</div>
+
+<div id="mensaje"></div>
 </div>
 
 <script>
 function si(){
-    document.getElementById("mensaje").innerHTML =
-    "✨ ¡Sabía que dirías que sí! 💞 ✨";
+document.getElementById("mensaje").innerHTML="💞 Sabía que dirías que sí 💞";
+}
+function no(){
+document.getElementById("mensaje").innerHTML="😳 Mmm… ¿Segura? intenta otra vez jeje";
 }
 
-/* Botón No escapa */
-function mover(btn){
-    btn.style.position="absolute";
-    btn.style.top=Math.random()*80+"%";
-    btn.style.left=Math.random()*80+"%";
-}
-
-/* Crear corazones */
 function crearCorazon(){
-    const corazon=document.createElement("div");
-    corazon.classList.add("corazon");
-    corazon.innerHTML="❤";
-    corazon.style.left=Math.random()*100+"vw";
-    corazon.style.animationDuration=(Math.random()*3+2)+"s";
-    document.body.appendChild(corazon);
-
-    setTimeout(()=>{corazon.remove()},5000);
+const c=document.createElement("div");
+c.classList.add("corazon");
+c.innerHTML="❤";
+c.style.left=Math.random()*100+"vw";
+c.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),5000);
 }
-setInterval(crearCorazon,300);
+setInterval(crearCorazon,400);
 </script>
 
 </body>
 </html>
+
 
